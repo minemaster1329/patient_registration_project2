@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="console_view_run" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="org.patient_registration_system.App" />
+    <module name="console_view" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
