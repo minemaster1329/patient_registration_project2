@@ -1,6 +1,7 @@
 package org.patient_registration_system;
 
 public class Patient {
+    public Long id;
     public String name;
     public String surname;
     public String email;
