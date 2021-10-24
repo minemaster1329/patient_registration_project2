@@ -9,12 +9,14 @@
         <module name="model" />
         <module name="controller" />
         <module name="console_view" />
+        <module name="pubstuff" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="console_view" target="1.7" />
       <module name="controller" target="16" />
-      <module name="model" target="1.7" />
+      <module name="model" target="9" />
+      <module name="pubstuff" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

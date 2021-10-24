@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.patient_registration_system</groupId>
-  <artifactId>console_view</artifactId>
+  <artifactId>pubstuff</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>console_view</name>
+  <name>pubstuff</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -25,18 +25,6 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
-    <dependency>
-      <groupId>org.patient_registration_system</groupId>
-      <artifactId>controller</artifactId>
-      <version>1.0-SNAPSHOT</version>
-      <scope>compile</scope>
-    </dependency>
-      <dependency>
-          <groupId>org.patient_registration_system</groupId>
-          <artifactId>pubstuff</artifactId>
-          <version>1.0-SNAPSHOT</version>
-          <scope>compile</scope>
-      </dependency>
   </dependencies>
 
   <build>

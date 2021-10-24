@@ -17,14 +17,15 @@ public class App
     {
         Scanner sc = new Scanner(System.in);
         int result = 0;
-
+        IErrorCommunicationStrategy iErrorCommunicationStrategy = new ConsoleErrorCommunicationStrategy();
+        PatientRegistrationSystemController.initializeModelSingleton(iErrorCommunicationStrategy);
         while (result != 2){
             ConsoleViewMenusSingleton.drawMainMenu();
             result = Integer.parseInt(sc.nextLine());
             switch (result){
                 case 0:
                     Patient pat = askForPatientData();
-                    PatientRegistrationSystemController.AddNewPatientToDb(pat);
+                    PatientRegistrationSystemController.AddNewPatientToDb(pat, iErrorCommunicationStrategy);
                     System.out.println("Patient added successfully");
                     break;
                 case 1:
