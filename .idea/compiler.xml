@@ -13,7 +13,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="console_view" target="1.7" />
-      <module name="controller" target="1.7" />
+      <module name="controller" target="16" />
       <module name="model" target="1.7" />
     </bytecodeTargetLevel>
   </component>
