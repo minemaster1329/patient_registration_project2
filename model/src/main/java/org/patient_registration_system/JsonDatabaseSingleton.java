@@ -16,18 +16,30 @@ import java.util.*;
 
 import static java.nio.file.StandardOpenOption.*;
 
+/**
+ * Stores data and provides basic methods
+ */
 public class JsonDatabaseSingleton {
+
     private static JsonDatabaseSingleton instance = null;
 
     List<Patient> patientArrayList = new ArrayList<>();
 
+    /**
+     * returns instance of instance
+     * @return instance of singleton
+     */
     public static JsonDatabaseSingleton getInstance() {
         if (instance == null){
             instance =  new JsonDatabaseSingleton();
         }
         return instance;
     }
-    
+
+    /**
+     * saves changes to database
+     * @throws IOException thrown when write to file error occured
+     */
     public void saveDatabase() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -39,6 +51,10 @@ public class JsonDatabaseSingleton {
         outputStream.close();
     }
 
+    /**
+     * initializes singleton by reading data from file
+     * @throws IOException thrown when read from file error occured
+     */
     public void initializeSingleton() throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
         patientArrayList = objectMapper.readValue(Paths.get("database.json").toFile(), new TypeReference<List<Patient>>(){});

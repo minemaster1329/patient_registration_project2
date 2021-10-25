@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"org.patient_reg_app"},{"l":"org.patient_registration_system"}];updateSearchResults();

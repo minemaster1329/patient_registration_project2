@@ -3,48 +3,94 @@ package org.patient_registration_system;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Stores data about patient
+ */
+
 public class Patient {
     private Long id;
     private String name;
     private String surname;
     private String email;
 
-    private Patient(){}
+    /**
+     * default patient constructor
+     */
+    public Patient(){}
 
+    /**
+     * patient constructor with parameter
+     * @param name patient's name
+     * @param surname patient's surname
+     * @param email patient's email
+     */
     public Patient(String name, String surname, String email){
         this.name = name;
         this.surname = surname;
         this.email = email;
     }
 
+    /**
+     * Sets patient's id
+     * @param id new patient's id
+     */
     public void setId(Long id){
         this.id = id;
     }
 
+    /**
+     * Gets patient's name
+     * @return patient's name
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * Gets patient's surname
+     * @return patient's surname
+     */
     public String getSurname(){
         return surname;
     }
 
+    /**
+     * Gets patient's email
+     * @return patient's email
+     */
     public String getEmail(){
         return email;
     }
 
+    /**
+     * Gets patient's ID number
+     * @return patient's ID
+     */
     public Long getId() {
         return id;
     }
 
+    /**
+     * Sets patient's name
+     * @param name new patient's name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Sets patient's surname
+     * @param surname new patient's surname
+     */
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    /**
+     * Sets patient's email
+     * @param email new patient's email
+     * @throws InvalidEmailFormatSetException thrown when invalid email
+     */
     public void setEmail(String email) throws InvalidEmailFormatSetException {
         Pattern pattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
         Matcher mc = pattern.matcher(email);

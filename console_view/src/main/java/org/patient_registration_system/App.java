@@ -19,7 +19,7 @@ public class App
         int result = 0;
         IErrorCommunicationStrategy iErrorCommunicationStrategy = new ConsoleErrorCommunicationStrategy();
         PatientRegistrationSystemController.initializeModelSingleton(iErrorCommunicationStrategy);
-        while (result != 2){
+        while (result != 3){
             ConsoleViewMenusSingleton.drawMainMenu();
             result = Integer.parseInt(sc.nextLine());
             switch (result){
@@ -35,6 +35,9 @@ public class App
                     sc.nextLine();
                     break;
                 case 2:
+                    ConsoleViewMenusSingleton.editPatientsEmail();
+                    break;
+                case 3:
                     break;
                 default:
                     System.out.println("Invalid option selected!");

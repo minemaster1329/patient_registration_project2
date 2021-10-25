@@ -2,10 +2,15 @@
   "id" : 26,
   "name" : "Jane",
   "surname" : "Doe",
-  "email" : "xd"
+  "email" : "xd@xd.pl"
 }, {
   "id" : 25,
   "name" : "xd",
   "surname" : "dx",
-  "email" : "xxx"
+  "email" : "xxx@xxx.com"
+}, {
+  "id" : -177,
+  "name" : "Jane",
+  "surname" : "Doe",
+  "email" : "jane@doe.com"
 } ]
