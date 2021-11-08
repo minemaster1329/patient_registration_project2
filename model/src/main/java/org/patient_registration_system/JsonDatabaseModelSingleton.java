@@ -3,12 +3,9 @@ package org.patient_registration_system;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.json.JSONArray;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,9 +16,9 @@ import static java.nio.file.StandardOpenOption.*;
 /**
  * Stores data and provides basic methods
  */
-public class JsonDatabaseSingleton {
+public class JsonDatabaseModelSingleton {
 
-    private static JsonDatabaseSingleton instance = null;
+    private static JsonDatabaseModelSingleton instance = null;
 
     List<Patient> patientArrayList = new ArrayList<>();
 
@@ -29,16 +26,16 @@ public class JsonDatabaseSingleton {
      * returns instance of instance
      * @return instance of singleton
      */
-    public static JsonDatabaseSingleton getInstance() {
+    public static JsonDatabaseModelSingleton getInstance() {
         if (instance == null){
-            instance =  new JsonDatabaseSingleton();
+            instance =  new JsonDatabaseModelSingleton();
         }
         return instance;
     }
 
     /**
      * saves changes to database
-     * @throws IOException thrown when write to file error occured
+     * @throws IOException thrown when write to file error occurred
      */
     public void saveDatabase() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -53,7 +50,7 @@ public class JsonDatabaseSingleton {
 
     /**
      * initializes singleton by reading data from file
-     * @throws IOException thrown when read from file error occured
+     * @throws IOException thrown when read from file error occurred
      */
     public void initializeSingleton() throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();

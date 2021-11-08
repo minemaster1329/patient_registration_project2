@@ -16,7 +16,7 @@ public class PatientRegistrationSystemController {
      * @param errorCommunicationStrategy strategy for error communicating
      */
     public static void AddNewPatientToDb(Patient patient, IErrorCommunicationStrategy errorCommunicationStrategy){
-        List<Long> patientKeys = JsonDatabaseSingleton.getInstance().patientArrayList.stream().map(x -> x.getId()).toList();
+        List<Long> patientKeys = JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().map(x -> x.getId()).toList();
         Random rnd = new Random();
 
         Long new_hash;
@@ -25,9 +25,9 @@ public class PatientRegistrationSystemController {
         } while (patientKeys.contains(new_hash));
         patient.setId(new_hash);
 
-        JsonDatabaseSingleton.getInstance().patientArrayList.add(patient);
+        JsonDatabaseModelSingleton.getInstance().patientArrayList.add(patient);
         try{
-            JsonDatabaseSingleton.getInstance().saveDatabase();
+            JsonDatabaseModelSingleton.getInstance().saveDatabase();
         }
         catch(IOException e){
             errorCommunicationStrategy.writeError("Error when saving database changes to file", e.getMessage());
@@ -39,7 +39,7 @@ public class PatientRegistrationSystemController {
      * @return list of all patients
      */
     public static ArrayList<Patient> getAllPatients(){
-        return new ArrayList<>(JsonDatabaseSingleton.getInstance().patientArrayList);
+        return new ArrayList<>(JsonDatabaseModelSingleton.getInstance().patientArrayList);
     }
 
     /**
@@ -48,7 +48,7 @@ public class PatientRegistrationSystemController {
      */
     public static void initializeModelSingleton(IErrorCommunicationStrategy iErrorCommunicationStrategy){
         try {
-            JsonDatabaseSingleton.getInstance().initializeSingleton();
+            JsonDatabaseModelSingleton.getInstance().initializeSingleton();
         }
         catch (Exception e) {
             iErrorCommunicationStrategy.writeError("Error when initializing model", e.getMessage());
@@ -61,7 +61,7 @@ public class PatientRegistrationSystemController {
      * @return patient with given id
      */
     public static Optional<Patient> getPatientByID(long id){
-        return JsonDatabaseSingleton.getInstance().patientArrayList.stream().filter(x->x.getId() == id).findAny();
+        return JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().filter(x->x.getId() == id).findAny();
     }
 
     /**
@@ -70,7 +70,7 @@ public class PatientRegistrationSystemController {
      */
     public static void saveDatabase(IErrorCommunicationStrategy iErrorCommunicationStrategy){
         try {
-            JsonDatabaseSingleton.getInstance().saveDatabase();
+            JsonDatabaseModelSingleton.getInstance().saveDatabase();
         }
         catch (Exception e) {
             iErrorCommunicationStrategy.writeError("Error when saving database", e.getMessage());

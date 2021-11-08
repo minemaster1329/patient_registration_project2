@@ -1,48 +1,44 @@
 package org.patient_registration_system;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PatientTest {
 
-    @org.junit.jupiter.api.Test
-    void setEmail() {
-        Exception e = assertThrows(InvalidEmailFormatSetException.class, ()-> {
-           Patient pt = new Patient("", "", "");
-           pt.setEmail("invalid");
-        });
-
-        e = assertThrows(InvalidEmailFormatSetException.class, ()-> {
-            Patient pt = new Patient("", "", "");
-            pt.setEmail("invalid@");
-        });
-        e = assertThrows(InvalidEmailFormatSetException.class, ()-> {
-            Patient pt = new Patient("", "", "");
-            pt.setEmail("@");
-        });
-
-        e = assertThrows(InvalidEmailFormatSetException.class, ()-> {
-            Patient pt = new Patient("", "", "");
-            pt.setEmail("@invalid");
-        });
-
-        e = assertThrows(InvalidEmailFormatSetException.class, ()-> {
-            Patient pt = new Patient("", "", "");
-            pt.setEmail("invalid");
-        });
-
-        assertDoesNotThrow(()-> {
-            Patient pt = new Patient("", "", "");
-            pt.setEmail("domain@comain.com");
-        });
-
-        assertDoesNotThrow(()-> {
-            Patient pt = new Patient("", "", "");
-            pt.setEmail("123domain@comain.com");
-        });
-
-        assertDoesNotThrow(()-> {
-            Patient pt = new Patient("", "", "");
-            pt.setEmail("domain@comain1.com");
-        });
+    @ParameterizedTest(name = "{index} => a={0}, b={1}")
+    @CsvSource({
+            "invalid,0",
+            "invalid@,0",
+            "@,0",
+            "@invalid,0",
+            "@invalid.com,0",
+            ",0",
+            "invalid@invalid,0",
+            "valid@valid.com,1",
+            "valid123@valid.com,1",
+            "123valid@valid.com,1"
+    })
+    void setEmail(String a, Integer b){
+        switch (b){
+            case 0:
+                if (a != null){
+                    Exception e = assertThrows(InvalidEmailFormatSetException.class, ()-> {
+                        Patient pt = new Patient();
+                        pt.setEmail(a);
+                    });
+                }
+                break;
+            case 1:
+                assertDoesNotThrow(()->{
+                    Patient pt = new Patient();
+                    pt.setEmail(a);
+                });
+                break;
+            default:
+                fail("Invalid input");
+                break;
+        }
     }
 }

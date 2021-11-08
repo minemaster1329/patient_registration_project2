@@ -16,7 +16,7 @@
       <module name="console_view" target="16" />
       <module name="controller" target="16" />
       <module name="model" target="9" />
-      <module name="pubstuff" target="1.7" />
+      <module name="pubstuff" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

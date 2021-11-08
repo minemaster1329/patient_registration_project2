@@ -17,11 +17,14 @@ public class App
     {
         Scanner sc = new Scanner(System.in);
         int result = 0;
+        String result_str = "";
         IErrorCommunicationStrategy iErrorCommunicationStrategy = new ConsoleErrorCommunicationStrategy();
         PatientRegistrationSystemController.initializeModelSingleton(iErrorCommunicationStrategy);
         while (result != 3){
             ConsoleViewMenusSingleton.drawMainMenu();
-            result = Integer.parseInt(sc.nextLine());
+            result_str = sc.nextLine();
+            if (!PublicStaticMethods.canParseToInt(result_str))  result = -1;
+            else result = Integer.parseInt(sc.nextLine());
             switch (result){
                 case 0:
                     Patient pat = askForPatientData();
