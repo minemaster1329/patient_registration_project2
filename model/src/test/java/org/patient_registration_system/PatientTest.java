@@ -1,5 +1,6 @@
 package org.patient_registration_system;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -40,5 +41,37 @@ class PatientTest {
                 fail("Invalid input");
                 break;
         }
+    }
+
+    @Test
+    void setId() {
+    }
+
+    @Test
+    void getName() {
+    }
+
+    @Test
+    void getSurname() {
+    }
+
+    @Test
+    void getEmail() {
+    }
+
+    @Test
+    void getId() {
+    }
+
+    @Test
+    void setName() {
+    }
+
+    @Test
+    void setSurname() {
+    }
+
+    @Test
+    void testSetEmail() {
     }
 }

@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 /**
  * Stores data about patient
  */
-
 public class Patient {
     private Long id;
     private String name;
@@ -17,18 +16,6 @@ public class Patient {
      * default patient constructor
      */
     public Patient(){}
-
-    /**
-     * patient constructor with parameter
-     * @param name patient's name
-     * @param surname patient's surname
-     * @param email patient's email
-     */
-    public Patient(String name, String surname, String email){
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-    }
 
     /**
      * Sets patient's id

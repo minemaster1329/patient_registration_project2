@@ -24,7 +24,7 @@ public class App
             ConsoleViewMenusSingleton.drawMainMenu();
             result_str = sc.nextLine();
             if (!PublicStaticMethods.canParseToInt(result_str))  result = -1;
-            else result = Integer.parseInt(sc.nextLine());
+            else result = Integer.parseInt(result_str);
             switch (result){
                 case 0:
                     Patient pat = askForPatientData();
@@ -58,7 +58,17 @@ public class App
         String surname = promptForString("Enter surname: ");
         String email = promptForString("Enter email:");
 
-        return new Patient(name, surname, email);
+        Patient pt = new Patient();
+        try {
+            pt.setEmail(email);
+            pt.setName(name);
+            pt.setSurname(surname);
+        }
+        catch(Exception e){
+
+        }
+
+        return pt;
     }
 
 
