@@ -1,77 +1,99 @@
 package org.patient_registration_system;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PatientTest {
+    Patient pt = null;
+    @BeforeEach
+    void init(){
+        pt = new Patient();
+    }
 
-    @ParameterizedTest(name = "{index} => a={0}, b={1}")
-    @CsvSource({
-            "invalid,0",
-            "invalid@,0",
-            "@,0",
-            "@invalid,0",
-            "@invalid.com,0",
-            ",0",
-            "invalid@invalid,0",
-            "valid@valid.com,1",
-            "valid123@valid.com,1",
-            "123valid@valid.com,1"
-    })
-    void setEmail(String a, Integer b){
-        switch (b){
-            case 0:
-                if (a != null){
-                    Exception e = assertThrows(InvalidEmailFormatSetException.class, ()-> {
-                        Patient pt = new Patient();
-                        pt.setEmail(a);
-                    });
-                }
-                break;
-            case 1:
-                assertDoesNotThrow(()->{
-                    Patient pt = new Patient();
-                    pt.setEmail(a);
-                });
-                break;
-            default:
-                fail("Invalid input");
-                break;
+    @Nested
+    class SetEmailTest{
+        @Test
+        void setEmailInvalidNull(){
+            assertDoesNotThrow(()-> {
+                pt.setEmail(null);
+            });
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"invalid", "invalid@", "@","@invalid", "@invalid.com"})
+        void setEmailInvalidFormat(String email){
+            assertThrows(InvalidEmailFormatSetException.class, ()->{
+               pt.setEmail(email);
+            });
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"valid@valid.com", "valid123@valid.com", "123valid@valid.com"})
+        void setEmailValid(String email){
+            assertDoesNotThrow(()->{
+                pt.setEmail(email);
+            });
         }
     }
 
-    @Test
-    void setId() {
+    @Nested
+    @DisplayName("setName test")
+    class SetNameTest{
+        @ParameterizedTest
+        @ValueSource(strings = {"Mateusz", "Xd"})
+        void setNameValidNamesTest(String name){
+            assertDoesNotThrow(()->{
+                pt.setName(name);
+            });
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"mateusz", "xd", "1xxx", "M1teusz", "Mateus1"})
+        void setNameInvalidNamesTest(String name){
+            assertThrows(InvalidNameFormatSetException.class,()->{
+                pt.setName(name);
+            });
+        }
+
+        @Test
+        void setNameNullNameTest(){
+            assertThrows(NullPointerException.class,()->{
+                pt.setName(null);
+            });
+        }
     }
 
-    @Test
-    void getName() {
-    }
+    @Nested
+    @DisplayName("setSurname test")
+    class SetSurnameTest{
+        @ParameterizedTest
+        @ValueSource(strings = {"Mateusz", "Xd"})
+        void setNameValidNamesTest(String name){
+            assertDoesNotThrow(()->{
+                pt.setSurname(name);
+            });
+        }
 
-    @Test
-    void getSurname() {
-    }
+        @ParameterizedTest
+        @ValueSource(strings = {"mateusz", "xd", "1xxx", "M1teusz", "Mateus1"})
+        void setNameInvalidNamesTest(String name){
+            assertThrows(InvalidNameFormatSetException.class,()->{
+                pt.setSurname(name);
+            });
+        }
 
-    @Test
-    void getEmail() {
-    }
-
-    @Test
-    void getId() {
-    }
-
-    @Test
-    void setName() {
-    }
-
-    @Test
-    void setSurname() {
-    }
-
-    @Test
-    void testSetEmail() {
+        @Test
+        void setNameNullNameTest(){
+            assertThrows(NullPointerException.class,()->{
+                pt.setSurname(null);
+            });
+        }
     }
 }

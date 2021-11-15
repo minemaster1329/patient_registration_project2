@@ -1,6 +1,7 @@
 package org.patient_registration_system;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 /**
@@ -16,7 +17,8 @@ public class ConsoleViewMenusSingleton {
         System.out.println("[0] add new patient.");
         System.out.println("[1] print out all patients.");
         System.out.println("[2] edit patient's email.");
-        System.out.println("[3] exit.");
+        System.out.println("[3] delete all patients.");
+        System.out.println("[4] exit.");
     }
 
     /**
@@ -63,22 +65,24 @@ public class ConsoleViewMenusSingleton {
             else System.out.println("Invalid patient's id. Enter correct patient's id or q for exit");
         } while (true);
         if (!exited){
-            final Long pat_id = id;
-            Patient pt = PatientRegistrationSystemController.getPatientByID(id).get();
-            System.out.println("Enter new patient's email");
-            while (true){
-                try {
-                    input = sc.nextLine();
-                    pt.setEmail(input);
-                    System.out.println("Patient's id changed successfully");
+            Optional<Patient> pt = PatientRegistrationSystemController.getPatientByID(id);
+            if (pt.isPresent()){
+                System.out.println("Enter new patient's email");
+                while (true){
+                    try {
+                        input = sc.nextLine();
+                        pt.get().setEmail(input);
+                        System.out.println("Patient's id changed successfully");
 
-                    break;
-                }
-                catch (InvalidEmailFormatSetException e){
-                    System.out.println("Invalid email entered");
-                }
+                        break;
+                    }
+                    catch (InvalidEmailFormatSetException e){
+                        System.out.println("Invalid email entered");
+                    }
 
+                }
             }
+            else System.out.println("Patient with given ID does not exist...");
         }
     }
 

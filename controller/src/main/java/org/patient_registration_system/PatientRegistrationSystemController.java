@@ -16,7 +16,7 @@ public class PatientRegistrationSystemController {
      * @param errorCommunicationStrategy strategy for error communicating
      */
     public static void AddNewPatientToDb(Patient patient, IErrorCommunicationStrategy errorCommunicationStrategy){
-        List<Long> patientKeys = JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().map(x -> x.getId()).toList();
+        List<Long> patientKeys = JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().map(Patient::getId).toList();
         Random rnd = new Random();
 
         Long new_hash;
@@ -32,6 +32,27 @@ public class PatientRegistrationSystemController {
         catch(IOException e){
             errorCommunicationStrategy.writeError("Error when saving database changes to file", e.getMessage());
         }
+    }
+
+    /**
+     * Removes all patients from database
+     * @param errorCommunicationStrategy strategy for error communicating
+     */
+    public static void DeleteAllPatients(IErrorCommunicationStrategy errorCommunicationStrategy){
+        ArrayList<Patient> list_backup = getAllPatients();
+        try{
+            JsonDatabaseModelSingleton.getInstance().patientArrayList.clear();
+            JsonDatabaseModelSingleton.getInstance().saveDatabase();
+        }
+        catch (IOException e){
+            errorCommunicationStrategy.writeError("Error when saving database", e.getMessage());
+            list_backup.forEach(p->JsonDatabaseModelSingleton.getInstance().patientArrayList.add(p));
+        }
+    }
+
+    public static void DeletePatientWithSpecifiedID(Long id,IErrorCommunicationStrategy errorCommunicationStrategy){
+        Patient pt = getPatientByID(id).get();
+
     }
 
     /**
@@ -62,18 +83,5 @@ public class PatientRegistrationSystemController {
      */
     public static Optional<Patient> getPatientByID(long id){
         return JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().filter(x->x.getId() == id).findAny();
-    }
-
-    /**
-     * saves database to file
-     * @param iErrorCommunicationStrategy strategy for error displaying
-     */
-    public static void saveDatabase(IErrorCommunicationStrategy iErrorCommunicationStrategy){
-        try {
-            JsonDatabaseModelSingleton.getInstance().saveDatabase();
-        }
-        catch (Exception e) {
-            iErrorCommunicationStrategy.writeError("Error when saving database", e.getMessage());
-        }
     }
 }

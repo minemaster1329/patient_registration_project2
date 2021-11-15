@@ -1,16 +1,6 @@
 [ {
-  "id" : 26,
-  "name" : "Jane",
-  "surname" : "Doe",
-  "email" : "xd@xd.pl"
-}, {
-  "id" : 25,
-  "name" : "xd",
-  "surname" : "dx",
-  "email" : "xxx@xxx.com"
-}, {
-  "id" : -177,
-  "name" : "Jane",
-  "surname" : "Doe",
+  "id" : -167,
+  "name" : "Patient",
+  "surname" : "Pat",
   "email" : "jane@doe.com"
 } ]

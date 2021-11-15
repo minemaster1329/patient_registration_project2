@@ -20,31 +20,33 @@ public class App
         String result_str = "";
         IErrorCommunicationStrategy iErrorCommunicationStrategy = new ConsoleErrorCommunicationStrategy();
         PatientRegistrationSystemController.initializeModelSingleton(iErrorCommunicationStrategy);
-        while (result != 3){
+        while (result != 4){
             ConsoleViewMenusSingleton.drawMainMenu();
             result_str = sc.nextLine();
             if (!PublicStaticMethods.canParseToInt(result_str))  result = -1;
             else result = Integer.parseInt(result_str);
-            switch (result){
-                case 0:
+            switch (result) {
+                case 0 -> {
                     Patient pat = askForPatientData();
                     PatientRegistrationSystemController.AddNewPatientToDb(pat, iErrorCommunicationStrategy);
                     System.out.println("Patient added successfully");
-                    break;
-                case 1:
+                }
+                case 1 -> {
                     List<Patient> list = PatientRegistrationSystemController.getAllPatients();
-                    for (Patient p : list) ConsoleViewMenusSingleton.printOutPatient(p);
+                    list.forEach(ConsoleViewMenusSingleton::printOutPatient);
                     System.out.println("End of patient's list. Press any key to return to menu...");
                     sc.nextLine();
-                    break;
-                case 2:
-                    ConsoleViewMenusSingleton.editPatientsEmail();
-                    break;
-                case 3:
-                    break;
-                default:
-                    System.out.println("Invalid option selected!");
-                    break;
+                }
+                case 2 -> ConsoleViewMenusSingleton.editPatientsEmail();
+                case 3 -> {
+                    PatientRegistrationSystemController.DeleteAllPatients(iErrorCommunicationStrategy);
+                    System.out.println("All patients have been removed...");
+                    sc.nextLine();
+                }
+                case 4 -> {
+
+                }
+                default -> System.out.println("Invalid option selected!");
             }
         }
     }
