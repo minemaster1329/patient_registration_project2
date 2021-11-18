@@ -1,7 +1,7 @@
 package org.patient_registration_system;
 
 /**
- *
+ * Contains common methods for all packages
  */
 public class PublicStaticMethods {
     /**
