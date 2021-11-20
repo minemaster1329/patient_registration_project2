@@ -1,7 +1,10 @@
 package org.patient_registration_system;
 
-import java.util.ArrayList;
-import java.util.List;
+import exceptions.InvalidEmailFormatException;
+import exceptions.InvalidNameFormatException;
+import exceptions.InvalidSurnameFormatException;
+import models.Patient;
+
 import java.util.Scanner;
 
 /**
@@ -11,49 +14,47 @@ public class App
 {
     /**
      * Console app main function. Everything starts and finishes here
-     * @param args command line arguments
+     * @param args command line arguments (-h for help; -c to clear database)
      */
     public static void main( String[] args )
     {
         if (args.length == 0){
             Scanner sc = new Scanner(System.in);
             int result = 0;
-            String result_str = "";
+            String result_str;
             IErrorCommunicationStrategy errorCommunicationStrategy = new ConsoleErrorCommunicationStrategy();
-            PatientRegistrationSystemController.initializeModelSingleton(errorCommunicationStrategy);
-            loop: while (result != 4){
-                ConsoleViewMenusSingleton.drawMainMenu();
-                result_str = sc.nextLine();
-                if (!PublicStaticMethods.canParseToInt(result_str))  result = -1;
-                else result = Integer.parseInt(result_str);
-                switch (result) {
-                    case 0 -> {
-                        promptForPatientDataAndAdd(errorCommunicationStrategy);
+            if (PatientRegistrationSystemController.initializeModelSingleton(errorCommunicationStrategy)){
+                loop: while (result != 4){
+                    ConsoleViewMenusSingleton.drawMainMenu();
+                    result_str = sc.nextLine();
+                    if (!PublicStaticMethods.canParseToInt(result_str))  result = -1;
+                    else result = Integer.parseInt(result_str);
+                    switch (result) {
+                        case 0 -> promptForPatientDataAndAdd(errorCommunicationStrategy);
+                        case 1 -> {
+                            ConsoleViewMenusSingleton.printOutAllPatients();
+                        }
+                        case 2 -> ConsoleViewMenusSingleton.editPatientsEmail();
+                        case 3 -> {
+                            PatientRegistrationSystemController.DeleteAllPatients(errorCommunicationStrategy);
+                            System.out.println("All patients have been removed...");
+                            sc.nextLine();
+                        }
+                        case 4 -> {
+                            break loop;
+                        }
+                        default -> System.out.println("Invalid option selected!");
                     }
-                    case 1 -> {
-                        List<Patient> list = PatientRegistrationSystemController.getAllPatients();
-                        list.forEach(ConsoleViewMenusSingleton::printOutPatient);
-                        System.out.println("End of patient's list. Press any key to return to menu...");
-                        sc.nextLine();
-                    }
-                    case 2 -> ConsoleViewMenusSingleton.editPatientsEmail();
-                    case 3 -> {
-                        PatientRegistrationSystemController.DeleteAllPatients(errorCommunicationStrategy);
-                        System.out.println("All patients have been removed...");
-                        sc.nextLine();
-                    }
-                    case 4 -> {
-                        break loop;
-                    }
-                    default -> System.out.println("Invalid option selected!");
                 }
             }
         }
 
         else if (args[0].equals("-h")){
-            System.out.println("Patient's register system");
-            System.out.println("Version: 1.0");
-            System.out.println("Run program without parameters to use");
+            ConsoleViewMenusSingleton.showHelp();
+        }
+
+        else if (args[0].equals("-c")){
+            ConsoleViewMenusSingleton.askForDatabaseWipeOut();
         }
 
         else {
@@ -95,23 +96,12 @@ public class App
         return sc.nextLine();
     }
 
-    /**
-     * prints main menu options
-     */
-    private static void printOptions(){
-        System.out.print("\033[H\033[2J");
-        System.out.println("Choose action:");
-        System.out.println("[0] add new patient.");
-        System.out.println("[1] print out all patients.");
-        System.out.println("[2] exit.");
-    }
-
     private static void promptForPatientDataAndAdd(IErrorCommunicationStrategy errorCommunicationStrategy){
         Patient pt = new Patient();
         System.out.println("Enter new patient's data (or q to exit)");
         boolean not_cancelled = true;
 
-        while (not_cancelled){
+        do {
             String input = promptForString("Enter patient's name: ");
             try {
                 if (input.equals("q")){
@@ -121,10 +111,10 @@ public class App
                 pt.setName(input);
                 break;
             }
-            catch (InvalidNameFormatSetException e){
+            catch (InvalidNameFormatException e){
                 System.out.println("Invalid name");
             }
-        }
+        } while (not_cancelled);
 
         while (not_cancelled){
             String input = promptForString("Enter patient's surname: ");
@@ -136,7 +126,7 @@ public class App
                 pt.setSurname(input);
                 break;
             }
-            catch (InvalidNameFormatSetException e){
+            catch (InvalidSurnameFormatException e){
                 System.out.println("Invalid surname");
             }
         }
@@ -151,7 +141,7 @@ public class App
                 pt.setEmail(input);
                 break;
             }
-            catch (InvalidEmailFormatSetException e){
+            catch (InvalidEmailFormatException e){
                 System.out.println("Invalid name");
             }
         }

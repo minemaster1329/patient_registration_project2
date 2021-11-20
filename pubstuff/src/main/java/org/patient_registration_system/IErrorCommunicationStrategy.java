@@ -9,5 +9,5 @@ public interface IErrorCommunicationStrategy {
      * @param caption error caption
      * @param message error message
      */
-    void writeError(String caption, String message);
+    void writeError(String caption, String message, Object... parameters);
 }

@@ -1,11 +1,1 @@
-[ {
-  "id" : -167,
-  "name" : "Patient",
-  "surname" : "Pat",
-  "email" : "jane@doe.com"
-}, {
-  "id" : -67,
-  "name" : "Mateusz",
-  "surname" : "Czarnecki",
-  "email" : "jane@doe.com"
-} ]
+[ ]

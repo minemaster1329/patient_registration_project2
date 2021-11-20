@@ -18,4 +18,14 @@ public class PublicStaticMethods {
             return false;
         }
     }
+
+    public static boolean canParseToLong(String input){
+        try {
+            Long a = Long.parseLong(input);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
 }

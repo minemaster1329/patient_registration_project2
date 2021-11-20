@@ -3,7 +3,7 @@
     <module name="pubstuff" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="org.patient_registration_system.*" />
+        <option name="PATTERN" value="exceptions.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

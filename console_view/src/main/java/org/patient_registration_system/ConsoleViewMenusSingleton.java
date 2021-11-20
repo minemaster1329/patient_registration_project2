@@ -1,5 +1,8 @@
 package org.patient_registration_system;
 
+import exceptions.InvalidEmailFormatException;
+import models.Patient;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -34,70 +37,81 @@ public class ConsoleViewMenusSingleton {
         System.out.println("End of current patient's data");
     }
 
+    public static void printOutAllPatients(){
+        System.out.println("Begin of Patient's list");
+        PatientRegistrationSystemController.getAllPatients().forEach(ConsoleViewMenusSingleton::printOutPatient);
+    }
+
     /**
      * prints email edit menu and handles editing patient's email
      */
     public static void editPatientsEmail(){
-        List<Patient> patients = PatientRegistrationSystemController.getAllPatients();
-        System.out.println("Existing patients");
-        for (Patient p : patients) System.out.println(p.getId());
-        Scanner sc = new Scanner(System.in);
-        String input;
-        boolean exited = false;
-        long id = 0L;
-        do {
-            System.out.print("Enter patient's id to edit (enter q to exit):");
-            input = sc.nextLine();
-            if (input.equals("q")) {
-                exited = true;
-                break;
-            }
-            else if (longCanParse(input)){
-                id = Long.parseLong(input);
-                if (patients.stream().map(Patient::getId).toList().contains(id)){
-                    System.out.println("Selected patient with ID "+id);
-                    break;
-                }
-                else {
-                    System.out.println("Patient with specified ID does not exists");
-                }
-            }
-            else System.out.println("Invalid patient's id. Enter correct patient's id or q for exit");
-        } while (true);
-        if (!exited){
-            Optional<Patient> pt = PatientRegistrationSystemController.getPatientByID(id);
-            if (pt.isPresent()){
-                System.out.println("Enter new patient's email");
-                while (true){
-                    try {
-                        input = sc.nextLine();
-                        pt.get().setEmail(input);
-                        System.out.println("Patient's id changed successfully");
 
-                        break;
-                    }
-                    catch (InvalidEmailFormatSetException e){
-                        System.out.println("Invalid email entered");
-                    }
+    }
 
-                }
-            }
-            else System.out.println("Patient with given ID does not exist...");
+    /**
+     * Shows help for program (used when program run with -h switch)
+     */
+    public static void showHelp(){
+        System.out.println("Patient's registration system");
+        System.out.println("Version: 1.0");
+        System.out.println("Run program without parameters to access database");
+        System.out.println("Run program with -h switch to view help");
+        System.out.println("Run program with -c switch to wipe out database");
+    }
+
+    /**
+     * Asks user for database wipe out
+     */
+    public static void askForDatabaseWipeOut(){
+        System.out.println("You are about to clear whole database...");
+        String input = "";
+        while (!input.equals("n") && !input.equals("y")){
+            input = promptForString("Are you sure? (y/n)");
+        }
+
+        if (input.equals("y")){
+            PatientRegistrationSystemController.DeleteAllPatients(new ConsoleErrorCommunicationStrategy());
+            System.out.println("Database cleared successfully");
+        }
+
+        else {
+            System.out.println("Operation cancelled...");
         }
     }
 
     /**
-     * checks if input string can be parsed to long
-     * @param input input string
-     * @return true when parsing string to long is possible with no issues
+     * Asks user for some input
+     * @param prompt string displayed as prompt
+     * @return string entered by user
      */
-    public static boolean longCanParse(String input){
-        try{
-            Long a = Long.parseLong(input);
-            return true;
+    public static String promptForString(String prompt){
+        System.out.print(prompt);
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLine();
+    }
+
+    public static Pair<Boolean, Patient> askForNewPatientData(IErrorCommunicationStrategy errorCommunicationStrategy){
+        Pair<Boolean, Patient> output = new Pair<>(true, new Patient());
+
+        Pair<Boolean, String> temp = PatientsDataAskSingleton.askForNewPatientsID();
+
+        output.element1 |= temp.element1;
+
+        if (output.element1){
+            try {
+                output.element2.setId(temp.element2);
+            }
+            catch (Exception e) {
+                output.element1 = false;
+                errorCommunicationStrategy.writeError("Error when saving patient's ID", e.getMessage());
+            }
         }
-        catch (Exception e) {
-            return false;
+
+        if (output.element1){
+
         }
+
+        return output;
     }
 }

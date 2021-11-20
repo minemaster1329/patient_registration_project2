@@ -1,10 +1,13 @@
 package org.patient_registration_system;
 
+import exceptions.InvalidIdFormatException;
+import models.Patient;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+import java.util.function.Predicate;
 
 /**
  * Registration system controller singleton
@@ -16,14 +19,13 @@ public class PatientRegistrationSystemController {
      * @param errorCommunicationStrategy strategy for error communicating
      */
     public static void AddNewPatientToDb(Patient patient, IErrorCommunicationStrategy errorCommunicationStrategy){
-        List<Long> patientKeys = JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().map(Patient::getId).toList();
-        Random rnd = new Random();
+        try {
+            patient.setId("00000000000");
+        }
+        catch (InvalidIdFormatException e){
+            errorCommunicationStrategy.writeError("Error when setting new patient's id", e.getMessage());
+        }
 
-        Long new_hash;
-        do {
-            new_hash = rnd.nextLong() % 256;
-        } while (patientKeys.contains(new_hash));
-        patient.setId(new_hash);
 
         JsonDatabaseModelSingleton.getInstance().patientArrayList.add(patient);
         try{
@@ -50,9 +52,8 @@ public class PatientRegistrationSystemController {
         }
     }
 
-    public static void DeletePatientWithSpecifiedID(Long id,IErrorCommunicationStrategy errorCommunicationStrategy){
-        Patient pt = getPatientByID(id).get();
-
+    public static void DeletePatientWithSpecifiedID(String id,IErrorCommunicationStrategy errorCommunicationStrategy){
+        JsonDatabaseModelSingleton.getInstance().patientArrayList.removeIf(item -> item.getId().equals(id));
     }
 
     /**
@@ -65,14 +66,16 @@ public class PatientRegistrationSystemController {
 
     /**
      * initializes database singleton
-     * @param iErrorCommunicationStrategy strategy for error communicating
+     * @param errorCommunicationStrategy strategy for error communicating
      */
-    public static void initializeModelSingleton(IErrorCommunicationStrategy iErrorCommunicationStrategy){
+    public static boolean initializeModelSingleton(IErrorCommunicationStrategy errorCommunicationStrategy){
         try {
             JsonDatabaseModelSingleton.getInstance().initializeSingleton();
+            return true;
         }
         catch (Exception e) {
-            iErrorCommunicationStrategy.writeError("Error when initializing model", e.getMessage());
+            errorCommunicationStrategy.writeError("Error when initializing model", e.getMessage());
+            return false;
         }
     }
 
@@ -81,7 +84,15 @@ public class PatientRegistrationSystemController {
      * @param id patient's id
      * @return patient with given id
      */
-    public static Optional<Patient> getPatientByID(long id){
-        return JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().filter(x->x.getId() == id).findAny();
+    public static Optional<Patient> getPatientByID(String id){
+        return JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().filter(x->x.getId().equals(id)).findAny();
+    }
+
+    public static Integer getAllPatientsCount(){
+        return JsonDatabaseModelSingleton.getInstance().patientArrayList.size();
+    }
+
+    public static List<Patient> getAllPatientsMeetingPredicate(Predicate<Patient> predicate){
+        return JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().filter(predicate).toList();
     }
 }

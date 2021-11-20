@@ -10,7 +10,7 @@ public class ConsoleErrorCommunicationStrategy implements IErrorCommunicationStr
      * @param message error message
      */
     @Override
-    public void writeError(String caption, String message) {
+    public void writeError(String caption, String message, Object... parameters) {
         System.err.println(caption + " : "+message);
     }
 }

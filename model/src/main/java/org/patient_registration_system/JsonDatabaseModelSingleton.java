@@ -3,6 +3,7 @@ package org.patient_registration_system;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import models.Patient;
 
 import java.io.IOException;
 import java.io.OutputStream;
