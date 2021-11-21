@@ -32,12 +32,10 @@ public class Patient extends Person {
      * @throws InvalidEmailFormatException thrown when invalid email
      */
     public void setEmail(String email) throws InvalidEmailFormatException {
-        if (email != null){
-            Pattern pattern = Pattern.compile(PublicRegexes.emailRegex, Pattern.CASE_INSENSITIVE);
-            Matcher mc = pattern.matcher(email);
-            if (!mc.matches()) throw new InvalidEmailFormatException("Trying to set invalid email for patient "+this.getId());
-            email = email.toLowerCase(Locale.ROOT);
+        if (email == null) throw new NullPointerException("Email can be empty but cannot be null");
+        if (email.isEmpty() || email.matches(PublicRegexes.emailRegex)){
+            this.email = email;
         }
-        this.email = email;
+        else throw new InvalidEmailFormatException("Email can be empty or must have correct format");
     }
 }

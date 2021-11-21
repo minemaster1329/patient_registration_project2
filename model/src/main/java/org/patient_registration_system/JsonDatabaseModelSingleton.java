@@ -3,6 +3,7 @@ package org.patient_registration_system;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import models.Doctor;
 import models.Patient;
 
 import java.io.IOException;
@@ -43,7 +44,7 @@ public class JsonDatabaseModelSingleton {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         String data = objectMapper.writeValueAsString(patientArrayList);
-        OutputStream outputStream = Files.newOutputStream(Paths.get("database.json"), CREATE, TRUNCATE_EXISTING);
+        OutputStream outputStream = Files.newOutputStream(Paths.get("patients.json"), CREATE, TRUNCATE_EXISTING);
 
         outputStream.write(data.getBytes(StandardCharsets.UTF_8));
         outputStream.close();
@@ -55,6 +56,6 @@ public class JsonDatabaseModelSingleton {
      */
     public void initializeSingleton() throws IOException{
         ObjectMapper objectMapper = new ObjectMapper();
-        patientArrayList = objectMapper.readValue(Paths.get("database.json").toFile(), new TypeReference<List<Patient>>(){});
+        patientArrayList = objectMapper.readValue(Paths.get("patients.json").toFile(), new TypeReference<List<Patient>>(){});
     }
 }

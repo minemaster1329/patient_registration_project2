@@ -91,12 +91,17 @@ public class ConsoleViewMenusSingleton {
         return sc.nextLine();
     }
 
+    /**
+     * asks for new patient's data
+     * @param errorCommunicationStrategy strategy for communicating errors
+     * @return Pair of boolean (was operation confirmed by user) and new Patient object
+     */
     public static Pair<Boolean, Patient> askForNewPatientData(IErrorCommunicationStrategy errorCommunicationStrategy){
         Pair<Boolean, Patient> output = new Pair<>(true, new Patient());
 
         Pair<Boolean, String> temp = PatientsDataAskSingleton.askForNewPatientsID();
 
-        output.element1 |= temp.element1;
+        output.element1 &= temp.element1;
 
         if (output.element1){
             try {
@@ -109,7 +114,59 @@ public class ConsoleViewMenusSingleton {
         }
 
         if (output.element1){
+            temp = PatientsDataAskSingleton.askForNewPatientsName();
+            output.element1 &= temp.element1;
+            if (output.element1){
+                try {
+                    output.element2.setName(temp.element2);
+                }
+                catch (Exception e) {
+                    output.element1 = false;
+                    errorCommunicationStrategy.writeError("Error when saving patient's name", e.getMessage());
+                }
+            }
+        }
 
+        if (output.element1){
+            temp = PatientsDataAskSingleton.askForNewPatientsSurname();
+            output.element1 &= temp.element1;
+            if (output.element1){
+                try {
+                    output.element2.setSurname(temp.element2);
+                }
+                catch (Exception e) {
+                    output.element1 = false;
+                    errorCommunicationStrategy.writeError("Error when saving patient's surname", e.getMessage());
+                }
+            }
+        }
+
+        if (output.element1){
+            temp = PatientsDataAskSingleton.askForNewPatientsMiddleName();
+            output.element1 &= temp.element1;
+            if (output.element1){
+                try {
+                    output.element2.setMiddleName(temp.element2);
+                }
+                catch (Exception e) {
+                    output.element1 = false;
+                    errorCommunicationStrategy.writeError("Error when saving patient's middle name", e.getMessage());
+                }
+            }
+        }
+
+        if (output.element1){
+            temp = PatientsDataAskSingleton.askForNewPatientsEmail();
+            output.element1 &= temp.element1;
+            if (output.element1){
+                try {
+                    output.element2.setEmail(temp.element2);
+                }
+                catch (Exception e) {
+                    output.element1 = false;
+                    errorCommunicationStrategy.writeError("Error when saving patient's email", e.getMessage());
+                }
+            }
         }
 
         return output;

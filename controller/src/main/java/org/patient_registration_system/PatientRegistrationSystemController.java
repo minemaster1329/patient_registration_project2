@@ -1,6 +1,5 @@
 package org.patient_registration_system;
 
-import exceptions.InvalidIdFormatException;
 import models.Patient;
 
 import java.io.IOException;
@@ -19,14 +18,6 @@ public class PatientRegistrationSystemController {
      * @param errorCommunicationStrategy strategy for error communicating
      */
     public static void AddNewPatientToDb(Patient patient, IErrorCommunicationStrategy errorCommunicationStrategy){
-        try {
-            patient.setId("00000000000");
-        }
-        catch (InvalidIdFormatException e){
-            errorCommunicationStrategy.writeError("Error when setting new patient's id", e.getMessage());
-        }
-
-
         JsonDatabaseModelSingleton.getInstance().patientArrayList.add(patient);
         try{
             JsonDatabaseModelSingleton.getInstance().saveDatabase();

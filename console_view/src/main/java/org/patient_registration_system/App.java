@@ -1,8 +1,5 @@
 package org.patient_registration_system;
 
-import exceptions.InvalidEmailFormatException;
-import exceptions.InvalidNameFormatException;
-import exceptions.InvalidSurnameFormatException;
 import models.Patient;
 
 import java.util.Scanner;
@@ -30,7 +27,15 @@ public class App
                     if (!PublicStaticMethods.canParseToInt(result_str))  result = -1;
                     else result = Integer.parseInt(result_str);
                     switch (result) {
-                        case 0 -> promptForPatientDataAndAdd(errorCommunicationStrategy);
+                        case 0 -> {
+                            Pair<Boolean, Patient> pair = ConsoleViewMenusSingleton.askForNewPatientData(errorCommunicationStrategy);
+                            if (pair.element1){
+                                PatientRegistrationSystemController.AddNewPatientToDb(pair.element2, errorCommunicationStrategy);
+                            }
+                            else {
+                                System.out.println("Operation has been cancelled");
+                            }
+                        }
                         case 1 -> {
                             ConsoleViewMenusSingleton.printOutAllPatients();
                         }
@@ -94,65 +99,5 @@ public class App
         System.out.print(prompt);
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
-    }
-
-    private static void promptForPatientDataAndAdd(IErrorCommunicationStrategy errorCommunicationStrategy){
-        Patient pt = new Patient();
-        System.out.println("Enter new patient's data (or q to exit)");
-        boolean not_cancelled = true;
-
-        do {
-            String input = promptForString("Enter patient's name: ");
-            try {
-                if (input.equals("q")){
-                    not_cancelled = false;
-                    break;
-                }
-                pt.setName(input);
-                break;
-            }
-            catch (InvalidNameFormatException e){
-                System.out.println("Invalid name");
-            }
-        } while (not_cancelled);
-
-        while (not_cancelled){
-            String input = promptForString("Enter patient's surname: ");
-            try {
-                if (input.equals("q")){
-                    not_cancelled = false;
-                    break;
-                }
-                pt.setSurname(input);
-                break;
-            }
-            catch (InvalidSurnameFormatException e){
-                System.out.println("Invalid surname");
-            }
-        }
-
-        while (not_cancelled){
-            String input = promptForString("Enter patient's name: ");
-            try {
-                if (input.equals("q")){
-                    not_cancelled = false;
-                    break;
-                }
-                pt.setEmail(input);
-                break;
-            }
-            catch (InvalidEmailFormatException e){
-                System.out.println("Invalid name");
-            }
-        }
-
-        if (not_cancelled){
-            PatientRegistrationSystemController.AddNewPatientToDb(pt, errorCommunicationStrategy);
-            System.out.println("Patient added successfully...");
-        }
-
-        else {
-            System.out.println("Operation has been cancelled");
-        }
     }
 }
