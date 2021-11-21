@@ -20,7 +20,7 @@ class PatientTest {
     class SetEmailTest{
         @Test
         void setEmailInvalidNull(){
-            assertDoesNotThrow(()-> pt.setEmail(null));
+            assertThrows(NullPointerException.class, ()->pt.setEmail(null));
         }
 
         @ParameterizedTest
