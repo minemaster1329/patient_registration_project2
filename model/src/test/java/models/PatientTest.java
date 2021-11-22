@@ -30,7 +30,7 @@ class PatientTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"valid@valid.com", "valid123@valid.com", "123valid@valid.com"})
+        @ValueSource(strings = {"valid@valid.com", "valid123@valid.com", "123valid@valid.com", ""})
         void setEmailValid(String email){
             assertDoesNotThrow(()->pt.setEmail(email));
         }

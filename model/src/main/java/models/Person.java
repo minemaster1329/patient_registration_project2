@@ -14,11 +14,12 @@ public class Person {
     private String name = null;
     private String surname = null;
     private String middleName = null;
+    private Gender gender = null;
 
     /**
      * Default constructor for person class
      */
-    protected Person(){}
+    protected Person(){gender = Gender.Unknown;}
 
     /**
      * Gets person's ID
@@ -107,5 +108,21 @@ public class Person {
             this.middleName = middleName;
         }
         else throw new InvalidMiddleNameFormatException("Middle name can be empty or can consist of letters only and start with uppercase");
+    }
+
+    /**
+     * gets person gender
+     * @return person's gender
+     */
+    public Gender getGender(){
+        return gender;
+    }
+
+    /**
+     * sets person gender
+     * @param gender new person's gender
+     */
+    public void setGender(Gender gender){
+        this.gender = gender;
     }
 }

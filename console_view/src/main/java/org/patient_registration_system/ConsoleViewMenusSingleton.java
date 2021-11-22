@@ -34,12 +34,16 @@ public class ConsoleViewMenusSingleton {
         System.out.println("Name: "+pt.getName());
         System.out.println("Surname: "+pt.getSurname());
         System.out.println("Email: "+pt.getEmail());
+        System.out.println("Gender: "+pt.getGender());
         System.out.println("End of current patient's data");
     }
 
     public static void printOutAllPatients(){
         System.out.println("Begin of Patient's list");
-        PatientRegistrationSystemController.getAllPatients().forEach(ConsoleViewMenusSingleton::printOutPatient);
+        List<Patient> pts = PatientRegistrationSystemController.getAllPatients();
+        for (Patient pt : pts){
+            printOutPatient(pt);
+        }
     }
 
     /**
@@ -116,14 +120,13 @@ public class ConsoleViewMenusSingleton {
         if (output.element1){
             temp = PatientsDataAskSingleton.askForNewPatientsName();
             output.element1 &= temp.element1;
-            if (output.element1){
-                try {
-                    output.element2.setName(temp.element2);
-                }
-                catch (Exception e) {
-                    output.element1 = false;
-                    errorCommunicationStrategy.writeError("Error when saving patient's name", e.getMessage());
-                }
+            if (!output.element1) return output;
+            try {
+                output.element2.setName(temp.element2);
+            }
+            catch (Exception e) {
+                output.element1 = false;
+                errorCommunicationStrategy.writeError("Error when saving patient's name", e.getMessage());
             }
         }
 

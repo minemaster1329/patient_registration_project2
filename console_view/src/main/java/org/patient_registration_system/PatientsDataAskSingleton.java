@@ -7,58 +7,52 @@ import java.util.Scanner;
  */
 public class PatientsDataAskSingleton {
     /**
-     *
-     * @return
+     * prompts for new patient's email
+     * @return pair of boolean (true if confirmed by user, false if operation cancelled) and string with contents
      */
-    // TODO: 21.11.2021 document function
     public static Pair<Boolean, String> askForNewPatientsEmail(){
         return promptForStringWRegex("Enter email", PublicRegexes.emailRegex, true);
     }
 
     /**
-     *
-     * @return
+     * prompts for new patient's name
+     * @return pair of boolean (true if confirmed by user, false if operation cancelled) and string with contents
      */
-    // TODO: 21.11.2021 document function
     public static Pair<Boolean, String> askForNewPatientsName(){
         return promptForStringWRegex("Enter name", PublicRegexes.nameRegex, false);
     }
 
     /**
-     *
-     * @return
+     * prompts for new patient's surname
+     * @return pair of boolean (true if confirmed by user, false if operation cancelled) and string with contents
      */
-    // TODO: 21.11.2021 document function
     public static Pair<Boolean, String> askForNewPatientsSurname(){
         return promptForStringWRegex("Enter surname", PublicRegexes.nameRegex, false);
     }
 
     /**
-     *
-     * @return
+     * prompts for new patient's middle name
+     * @return pair of boolean (true if confirmed by user, false if operation cancelled) and string with contents
      */
-    // TODO: 21.11.2021 document function
     public static Pair<Boolean, String> askForNewPatientsMiddleName(){
         return promptForStringWRegex("Enter middle name", PublicRegexes.nameRegex, true);
     }
 
     /**
-     *
-     * @return
+     * prompts for new patient's ID
+     * @return pair of boolean (true if confirmed by user, false if operation cancelled) and string with contents
      */
-    // TODO: 21.11.2021 document function
     public static Pair<Boolean, String> askForNewPatientsID(){
         return promptForStringWRegex("Enter ID (PESEL)", PublicRegexes.peselRegex, false);
     }
 
     /**
-     *
-     * @param prompt
-     * @param regex
-     * @param nullAllowed
-     * @return
+     * prompts user for some data in specified format
+     * @param prompt prompt string
+     * @param regex format regex
+     * @param nullAllowed is empty value allowed
+     * @return pair of boolean (true if data confirmed by user, false when cancelled) and string with data
      */
-    // TODO: 21.11.2021 document function
     public static Pair<Boolean, String> promptForStringWRegex(String prompt,String regex, Boolean nullAllowed){
         String out;
         boolean confirmed = true;
