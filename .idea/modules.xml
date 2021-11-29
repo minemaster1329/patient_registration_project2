@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/console_view/console_view.iml" filepath="$PROJECT_DIR$/console_view/console_view.iml" />
       <module fileurl="file://$PROJECT_DIR$/controller/controller.iml" filepath="$PROJECT_DIR$/controller/controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javafx_view/javafx_view.iml" filepath="$PROJECT_DIR$/javafx_view/javafx_view.iml" />
       <module fileurl="file://$PROJECT_DIR$/model/model.iml" filepath="$PROJECT_DIR$/model/model.iml" />
       <module fileurl="file://$PROJECT_DIR$/pubstuff/pubstuff.iml" filepath="$PROJECT_DIR$/pubstuff/pubstuff.iml" />
     </modules>

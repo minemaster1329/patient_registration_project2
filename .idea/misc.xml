@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/controller/pom.xml" />
         <option value="$PROJECT_DIR$/console_view/pom.xml" />
         <option value="$PROJECT_DIR$/pubstuff/pom.xml" />
+        <option value="$PROJECT_DIR$/javafx_view/pom.xml" />
       </list>
     </option>
   </component>
