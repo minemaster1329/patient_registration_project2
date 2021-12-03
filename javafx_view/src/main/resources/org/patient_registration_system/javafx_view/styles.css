@@ -1,0 +1,8 @@
+#main-view-vbox{
+    -fx-padding: 20px;
+}
+
+.main-view-button{
+    -fx-fill: red;
+    -fx-min-width: 20em;
+}

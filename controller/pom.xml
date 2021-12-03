@@ -26,7 +26,7 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.patient_reg_app</groupId>
+      <groupId>org.patient_registration_system</groupId>
       <artifactId>model</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>

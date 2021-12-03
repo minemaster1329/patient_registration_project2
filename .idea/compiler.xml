@@ -18,7 +18,7 @@
       <module name="controller" target="16" />
       <module name="javafx_view" target="17" />
       <module name="model" target="17" />
-      <module name="pubstuff" target="8" />
+      <module name="pubstuff" target="9" />
       <module name="swing_window_view" target="17" />
     </bytecodeTargetLevel>
   </component>

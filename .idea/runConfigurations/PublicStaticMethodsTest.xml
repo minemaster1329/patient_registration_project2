@@ -3,14 +3,14 @@
     <module name="pubstuff" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="exceptions.*" />
+        <option name="PATTERN" value="org.patient_registration_system.exceptions.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
     <option name="ALTERNATIVE_JRE_PATH" value="17" />
-    <option name="PACKAGE_NAME" value="org.patient_registration_system" />
-    <option name="MAIN_CLASS_NAME" value="org.patient_registration_system.PublicStaticMethodsTest" />
+    <option name="PACKAGE_NAME" value="org.patient_registration_system.javafx_view" />
+    <option name="MAIN_CLASS_NAME" value="org.patient_registration_system.javafx_view.PublicStaticMethodsTest" />
     <option name="METHOD_NAME" value="" />
     <option name="TEST_OBJECT" value="class" />
     <method v="2">
