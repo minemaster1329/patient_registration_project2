@@ -23,4 +23,39 @@ class PublicStaticMethodsTest {
             assertTrue(PublicStaticMethods.canParseToInt(input));
         }
     }
+
+    @Nested
+    class ValidatePESELChecksum{
+        @ParameterizedTest
+        @ValueSource(strings = {"97011454235",
+                "87082784741",
+                "05210423854",
+                "79082535337",
+                "02210229514",
+                "92061056937",
+                "03270842699",
+                "72100531512",
+                "85081799185",
+                "51090382581"
+        })
+        void validatePESELChecksumInvalid(String input){
+            assertFalse(PublicStaticMethods.validatePESELChecksum(input));
+        }
+
+        @ParameterizedTest
+        @ValueSource(strings = {"97011454236",
+                "87082784745",
+                "05210423856",
+                "79082535339",
+                "02210229512",
+                "92061056933",
+                "03270842691",
+                "72100531517",
+                "85081799184",
+                "51090382589"
+        })
+        void validatePESELChecksumValid(String input){
+            assertTrue(PublicStaticMethods.validatePESELChecksum(input));
+        }
+    }
 }

@@ -3,6 +3,9 @@
 }
 
 .main-view-button{
-    -fx-fill: red;
     -fx-min-width: 20em;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-pref-height: 3em;
 }

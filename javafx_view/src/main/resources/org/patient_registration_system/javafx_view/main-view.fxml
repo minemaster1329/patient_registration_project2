@@ -7,5 +7,6 @@
    <children>
       <Label fx:id="patientsCountLabel" />
       <Button mnemonicParsing="false" onAction="#onShowAllPatientsClick" styleClass="main-view-button" text=" Show All Patients" />
+      <Button mnemonicParsing="false" styleClass="main-view-button" text="Add new patient" />
    </children>
 </VBox>

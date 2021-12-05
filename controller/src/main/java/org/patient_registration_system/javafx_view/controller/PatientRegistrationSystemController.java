@@ -45,6 +45,11 @@ public class PatientRegistrationSystemController {
         }
     }
 
+    /**
+     * Removes specified patient from database
+     * @param id patient's ID
+     * @param errorCommunicationStrategy strategy for error communication
+     */
     public static void DeletePatientWithSpecifiedID(String id,IErrorCommunicationStrategy errorCommunicationStrategy){
         JsonDatabaseModelSingleton.getInstance().patientArrayList.removeIf(item -> item.getId().equals(id));
     }
@@ -81,10 +86,19 @@ public class PatientRegistrationSystemController {
         return JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().filter(x->x.getId().equals(id)).findAny();
     }
 
+    /**
+     * returns patient's count
+     * @return patient's count
+     */
     public static Integer getAllPatientsCount(){
         return JsonDatabaseModelSingleton.getInstance().patientArrayList.size();
     }
 
+    /**
+     * returns patients meeting specified predicate
+     * @param predicate predicate function
+     * @return patient's meeting predicate
+     */
     public static List<Patient> getAllPatientsMeetingPredicate(Predicate<Patient> predicate){
         return JsonDatabaseModelSingleton.getInstance().patientArrayList.stream().filter(predicate).toList();
     }

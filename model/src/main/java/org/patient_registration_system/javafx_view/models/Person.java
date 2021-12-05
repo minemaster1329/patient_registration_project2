@@ -5,6 +5,7 @@ import org.patient_registration_system.javafx_view.exceptions.InvalidMiddleNameF
 import org.patient_registration_system.javafx_view.exceptions.InvalidNameFormatException;
 import org.patient_registration_system.javafx_view.exceptions.InvalidSurnameFormatException;
 import org.patient_registration_system.javafx_view.pubstuff.PublicRegexes;
+import org.patient_registration_system.javafx_view.pubstuff.PublicStaticMethods;
 
 /**
  * Superclass for all persons in database
@@ -37,7 +38,7 @@ public class Person {
      */
     public void setId(String id) throws InvalidIdFormatException, NullPointerException {
         if (id == null) throw new NullPointerException("ID cannot be null");
-        if (id.matches(PublicRegexes.peselRegex)){
+        if (id.matches(PublicRegexes.peselRegex) && PublicStaticMethods.validatePESELChecksum(id)){
             this.id = id;
         }
         else throw new InvalidIdFormatException("Id must consist of 11 digits");
