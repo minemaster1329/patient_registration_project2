@@ -25,13 +25,13 @@ class PersonTest {
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"1", "1111111111A", "A1111111111", "XD", "AA11AA11AA1"})
+        @ValueSource(strings = {"1", "1111111111A", "A1111111111", "XD", "AA11AA11AA1","12345678910"})
         void setIdInvalid(String input){
             assertThrows(InvalidIdFormatException.class, ()->ps.setId(input));
         }
 
         @ParameterizedTest
-        @ValueSource(strings = {"12345678910", "00000000000"})
+        @ValueSource(strings = {"97011454236","87082784745"})
         void setIdValid(String input){
             assertDoesNotThrow(()->ps.setId(input));
         }

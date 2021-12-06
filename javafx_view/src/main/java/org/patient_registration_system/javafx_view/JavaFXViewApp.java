@@ -3,7 +3,6 @@ package org.patient_registration_system.javafx_view;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.patient_registration_system.javafx_view.controller.PatientRegistrationSystemController;
 
