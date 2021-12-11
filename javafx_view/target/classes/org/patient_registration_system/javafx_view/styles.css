@@ -1,0 +1,11 @@
+#main-view-vbox{
+    -fx-padding: 20px;
+}
+
+.main-view-button{
+    -fx-min-width: 20em;
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-pref-height: 3em;
+}
