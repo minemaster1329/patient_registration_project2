@@ -4,58 +4,65 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="new-patient-view-vbox" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.patient_registration_system.javafx_view.NewPatientViewController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.patient_registration_system.javafx_view.NewPatientViewController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="40.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="312.19999809265136" minHeight="10.0" prefHeight="294.19999809265136" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="-Infinity" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="new-patient-view-hbox">
-         <children>
-            <Label text="Name">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="newPatientName">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-      </HBox>
-      <HBox alignment="BASELINE_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="new-patient-view-hbox">
-         <children>
-            <Label text="Surname">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin></Label>
-            <TextField fx:id="newPatientSurame">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin></TextField>
-         </children></HBox>
-      <HBox alignment="BASELINE_LEFT" layoutX="30.0" layoutY="197.0" prefHeight="100.0" prefWidth="200.0" styleClass="new-patient-view-hbox">
-         <children>
-            <Label text="Middle Name">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </Label>
-            <TextField fx:id="newPatientMiddleName">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin>
-            </TextField>
-         </children>
-      </HBox>
-      <HBox alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="200.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#confirmButtonAction" styleClass="new-patient-view-button" text="Confirm">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin></Button>
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelButtonAction" styleClass="new-patient-view-button" text="Cancel">
-               <HBox.margin>
-                  <Insets left="5.0" />
-               </HBox.margin></Button>
-         </children>
-      </HBox>
+      <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirmButtonAction" prefHeight="26.0" prefWidth="296.0" text="Confirm" GridPane.columnSpan="2" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Button>
+      <Button fx:id="cancelButton" layoutX="15.0" layoutY="383.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="26.0" prefWidth="296.0" text="Cancel" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Button>
+      <Label text="PESEL">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin></Label>
+      <Label text="First Name" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin></Label>
+      <TextField fx:id="peselTextField" promptText="Enter PESEL" GridPane.columnIndex="1" />
+      <TextField fx:id="firstNameTextField" promptText="Enter First Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Label text="Surname" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin></Label>
+      <Label text="Middle Name (Optional)" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin></Label>
+      <TextField fx:id="surnameTextField" promptText="Enter Surname" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="middleNameTextField" promptText="Enter Middle Name" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="emailTextField" promptText="Enter E-mail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <Label text="Email (Optional)" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Gender" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Label>
+      <ChoiceBox fx:id="genderChoiceBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
    </children>
-</VBox>
+</GridPane>
