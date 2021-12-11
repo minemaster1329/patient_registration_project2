@@ -5,16 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.patient_registration_system.javafx_view.controller.PatientRegistrationSystemController;
 
 public class MainViewController {
     @FXML
     private Button showAllPatientsButton;
-
-    @FXML
-    private Label patientsCountLabel;
 
     @FXML
     protected void onShowAllPatientsClick(ActionEvent event){
@@ -22,7 +17,8 @@ public class MainViewController {
             FXMLLoader fxmlLoader = new FXMLLoader(JavaFXViewApp.class.getResource("patients-view.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Patient's list");
-            stage.setScene(new Scene(fxmlLoader.load(), 450,450));
+            stage.setScene(new Scene(fxmlLoader.load(), 640,450));
+            stage.setResizable(false);
             stage.showAndWait();
         }
         catch (Exception e){

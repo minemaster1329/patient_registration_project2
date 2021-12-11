@@ -2,6 +2,24 @@
     -fx-padding: 20px;
 }
 
+#patients-view-grid{
+    -fx-padding: 20px;
+}
+
+#new-patient-view-vbox{
+    -fx-padding: 20px;
+}
+
+.new-patient-view-button{
+    -fx-min-width: 20em;
+}
+
+.new-patient-view-hbox{
+    -fx-pref-height: 30px;
+    -fx-min-height: 30px;
+    -fx-max-height: 30px;
+}
+
 .main-view-button{
     -fx-min-width: 20em;
     -fx-padding: 5px;
