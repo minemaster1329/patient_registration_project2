@@ -50,7 +50,7 @@
     <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-compiler-manager:2.8.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.codehaus.plexus:plexus-compiler-javac:2.8.4" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:17.0.0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:linux:17.0.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:17.0.0.1" level="project" />
     <orderEntry type="module" module-name="pubstuff" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:20.1.0" level="project" />
   </component>
