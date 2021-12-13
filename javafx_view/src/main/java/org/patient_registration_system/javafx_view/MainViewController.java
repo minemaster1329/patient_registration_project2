@@ -7,10 +7,17 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for main view
+ */
 public class MainViewController {
     @FXML
     private Button showAllPatientsButton;
 
+    /**
+     * shows window with list of all patients
+     * @param event reference to event
+     */
     @FXML
     protected void onShowAllPatientsClick(ActionEvent event){
         try {
