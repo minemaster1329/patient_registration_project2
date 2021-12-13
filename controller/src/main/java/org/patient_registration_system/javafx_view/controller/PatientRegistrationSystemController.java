@@ -52,6 +52,12 @@ public class PatientRegistrationSystemController {
      */
     public static void DeletePatientWithSpecifiedID(String id,IErrorCommunicationStrategy errorCommunicationStrategy){
         JsonDatabaseModelSingleton.getInstance().patientArrayList.removeIf(item -> item.getId().equals(id));
+        try {
+            JsonDatabaseModelSingleton.getInstance().saveDatabase();
+        }
+        catch (Exception e){
+            errorCommunicationStrategy.writeError("Error when saving database", e.getMessage());
+        }
     }
 
     /**
